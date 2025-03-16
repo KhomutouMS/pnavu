@@ -2,7 +2,6 @@ package com.example.fakemaleru.service;
 
 import com.example.fakemaleru.model.User;
 import java.util.List;
-//import org.springframework.stereotype.Service;
 
 
 public interface UserService {
