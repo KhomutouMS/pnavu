@@ -13,19 +13,19 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-@SuppressWarnings("checkstyle:TypeName")
+@SuppressWarnings({"checkstyle:TypeName", "checkstyle:OuterTypeFilename"})
 @RestController
 @RequestMapping("/api/v1/fakemailru")
 
 @AllArgsConstructor
 
-public class userController {
+public class UserController {
     private UserService userService;
     @SuppressWarnings({"checkstyle:EmptyLineSeparator", "checkstyle:WhitespaceAround",
             "checkstyle:MethodName", "checkstyle:Indentation"})
     @GetMapping
-    public List<User> FindAllUsers(){
-        return userService.FindAllUsers();
+    public List<User> findAllUsers(){
+        return userService.findAllUsers();
     }
 
     @SuppressWarnings("checkstyle:WhitespaceAround")

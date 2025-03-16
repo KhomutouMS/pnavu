@@ -14,8 +14,8 @@ public class InMemoryMailRu implements UserService {
     private final InMemoryMailDao repository;
     @SuppressWarnings("checkstyle:EmptyLineSeparator")
     @Override
-    public List<User> FindAllUsers() {
-        return repository.FindAllUsers();
+    public List<User> findAllUsers() {
+        return repository.findAllUsers();
     }
 
     @Override

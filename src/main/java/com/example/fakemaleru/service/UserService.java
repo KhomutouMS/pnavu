@@ -7,7 +7,7 @@ import java.util.List;
 
 public interface UserService {
     @SuppressWarnings("checkstyle:MethodName")
-    List<User> FindAllUsers();
+    List<User> findAllUsers();
     @SuppressWarnings("checkstyle:EmptyLineSeparator")
     User saveUser(User newUser);
     @SuppressWarnings("checkstyle:EmptyLineSeparator")

@@ -15,7 +15,7 @@ import org.springframework.web.server.ResponseStatusException;
 public class InMemoryMailDao {
     private final List<User> users = new ArrayList<>();
     @SuppressWarnings({"checkstyle:EmptyLineSeparator", "checkstyle:MethodName"})
-    public List<User> FindAllUsers() {
+    public List<User> findAllUsers() {
         return users;
     }
 
@@ -60,7 +60,5 @@ public class InMemoryMailDao {
         else {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND);
         }
-        /*return users.stream().filter(user -> user.getEmail().equals(email)).findFirst()
-        .orElse(null);*/
     }
 }
