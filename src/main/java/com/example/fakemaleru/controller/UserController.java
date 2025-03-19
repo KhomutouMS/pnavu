@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @SuppressWarnings({"checkstyle:TypeName", "checkstyle:OuterTypeFilename"})
@@ -52,4 +53,11 @@ public class UserController {
     public void deleteUser(@PathVariable String email){
         userService.deleteUserByEmail(email);
     }
+
+    @SuppressWarnings("checkstyle:WhitespaceAround")
+    @GetMapping("/saerch")
+    public List<User> findUserByEmailQuery(@RequestParam String email){
+        return userService.findUserByEmailQuery(email);
+    }
+
 }

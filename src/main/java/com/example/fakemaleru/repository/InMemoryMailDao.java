@@ -14,6 +14,7 @@ import org.springframework.web.server.ResponseStatusException;
 @Repository
 public class InMemoryMailDao {
     private final List<User> users = new ArrayList<>();
+
     @SuppressWarnings({"checkstyle:EmptyLineSeparator", "checkstyle:MethodName"})
     public List<User> findAllUsers() {
         return users;
@@ -43,8 +44,7 @@ public class InMemoryMailDao {
         var user = findUserByEmail(email);
         if (user != null) {
             users.remove(user);
-        }
-        else {
+        } else {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND);
         }
     }
@@ -56,9 +56,19 @@ public class InMemoryMailDao {
                 orElse(null);
         if (userNow != null) {
             return userNow;
-        }
-        else {
+        } else {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND);
         }
+    }
+
+    @SuppressWarnings({"checkstyle:RightCurly", "checkstyle:WhitespaceAround",
+            "checkstyle:SeparatorWrap", "checkstyle:Indentation"})
+    public List<User> findUserByEmailQuery(String email) {
+        if (email == null || email.isEmpty()) {
+            return users;
+        }
+        return users.stream()
+                .filter(user -> user.getEmail().toLowerCase().contains(email.toLowerCase()))
+                .toList();
     }
 }

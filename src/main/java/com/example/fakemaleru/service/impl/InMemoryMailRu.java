@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 
 public class InMemoryMailRu implements UserService {
     private final InMemoryMailDao repository;
+
     @SuppressWarnings("checkstyle:EmptyLineSeparator")
     @Override
     public List<User> findAllUsers() {
@@ -31,11 +32,15 @@ public class InMemoryMailRu implements UserService {
     @Override
     public void deleteUserByEmail(String email) {
         repository.deleteUserByEmail(email);
-
     }
 
     @Override
     public User findUserByEmail(String email) {
         return repository.findUserByEmail(email);
+    }
+
+    @Override
+    public List<User> findUserByEmailQuery(String email) {
+        return repository.findUserByEmailQuery(email);
     }
 }

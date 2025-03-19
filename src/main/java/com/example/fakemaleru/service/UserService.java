@@ -15,4 +15,6 @@ public interface UserService {
     void deleteUserByEmail(String email);
     @SuppressWarnings("checkstyle:EmptyLineSeparator")
     User findUserByEmail(String email);
+    @SuppressWarnings("checkstyle:EmptyLineSeparator")
+    List<User> findUserByEmailQuery(String email);
 }
