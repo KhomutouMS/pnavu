@@ -4,6 +4,8 @@ import com.example.fakemaleru.model.User;
 import com.example.fakemaleru.service.UserService;
 import java.util.List;
 import lombok.AllArgsConstructor;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -16,7 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @SuppressWarnings({"checkstyle:TypeName", "checkstyle:OuterTypeFilename"})
 @RestController
-@RequestMapping("/api/v1/fakemailru")
+@RequestMapping("/fakemailru/users")
 
 @AllArgsConstructor
 
@@ -25,39 +27,40 @@ public class UserController {
     @SuppressWarnings({"checkstyle:EmptyLineSeparator", "checkstyle:WhitespaceAround",
             "checkstyle:MethodName", "checkstyle:Indentation"})
     @GetMapping
-    public List<User> findAllUsers(){
-        return userService.findAllUsers();
+    public ResponseEntity<List<User>> readAllUsers(){
+        List<User> users = userService.readAllUsers();
+        return new ResponseEntity<>(users, HttpStatus.OK);
     }
 
     @SuppressWarnings("checkstyle:WhitespaceAround")
-    @PostMapping("save_user")
+    @PostMapping("save")
 
     public User saveUser(@RequestBody User newUser){
-        return userService.saveUser(newUser);
+        return userService.createUser(newUser);
     }
 
     @SuppressWarnings("checkstyle:WhitespaceAround")
     @GetMapping("/{email}")
-    public User findUserByEmail(@PathVariable String email){
-        return userService.findUserByEmail(email);
+    public User readUserByEmail(@PathVariable String email){
+        return userService.readUserByEmail(email);
     }
 
     @SuppressWarnings("checkstyle:WhitespaceAround")
-    @PutMapping("update_users")
+    @PutMapping("update")
     public User updateUser(@RequestBody User newUser){
         return userService.updateUser(newUser);
     }
 
     @SuppressWarnings("checkstyle:WhitespaceAround")
-    @DeleteMapping("delete_user/{email}")
+    @DeleteMapping("delete/{email}")
     public void deleteUser(@PathVariable String email){
         userService.deleteUserByEmail(email);
     }
 
     @SuppressWarnings("checkstyle:WhitespaceAround")
     @GetMapping("/saerch")
-    public List<User> findUserByEmailQuery(@RequestParam String email){
-        return userService.findUserByEmailQuery(email);
+    public User raedUserByEmailQuery(@RequestParam String email){
+        return userService.readUserByEmailQuery(email);
     }
 
 }

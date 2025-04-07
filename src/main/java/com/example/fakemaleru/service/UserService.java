@@ -6,15 +6,15 @@ import java.util.List;
 
 public interface UserService {
     @SuppressWarnings("checkstyle:MethodName")
-    List<User> findAllUsers();
+    List<User> readAllUsers();
     @SuppressWarnings("checkstyle:EmptyLineSeparator")
-    User saveUser(User newUser);
+    User createUser(User newUser);
     @SuppressWarnings("checkstyle:EmptyLineSeparator")
     User updateUser(User newUser);
     @SuppressWarnings("checkstyle:EmptyLineSeparator")
     void deleteUserByEmail(String email);
     @SuppressWarnings("checkstyle:EmptyLineSeparator")
-    User findUserByEmail(String email);
+    User readUserByEmail(String email);
     @SuppressWarnings("checkstyle:EmptyLineSeparator")
-    List<User> findUserByEmailQuery(String email);
+    User readUserByEmailQuery(String email);
 }
