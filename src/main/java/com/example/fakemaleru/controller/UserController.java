@@ -32,35 +32,42 @@ public class UserController {
         return new ResponseEntity<>(users, HttpStatus.OK);
     }
 
-    @SuppressWarnings("checkstyle:WhitespaceAround")
     @PostMapping("save")
-
-    public User saveUser(@RequestBody User newUser){
+    public User saveUser(@RequestBody User newUser) {
         return userService.createUser(newUser);
     }
 
-    @SuppressWarnings("checkstyle:WhitespaceAround")
     @GetMapping("/{email}")
-    public User readUserByEmail(@PathVariable String email){
+    public User readUserByEmail(@PathVariable String email) {
         return userService.readUserByEmail(email);
     }
 
-    @SuppressWarnings("checkstyle:WhitespaceAround")
     @PutMapping("update")
-    public User updateUser(@RequestBody User newUser){
+    public User updateUser(@RequestBody User newUser) {
         return userService.updateUser(newUser);
     }
 
-    @SuppressWarnings("checkstyle:WhitespaceAround")
     @DeleteMapping("delete/{email}")
-    public void deleteUser(@PathVariable String email){
+    public void deleteUser(@PathVariable String email) {
         userService.deleteUserByEmail(email);
     }
 
-    @SuppressWarnings("checkstyle:WhitespaceAround")
     @GetMapping("/saerch")
-    public User raedUserByEmailQuery(@RequestParam String email){
-        return userService.readUserByEmailQuery(email);
+    public User raedUserByEmailQuery(@RequestParam String email) {
+        return userService.readUserByEmail(email);
     }
 
+    @SuppressWarnings("checkstyle:ParameterName")
+    @GetMapping("/question_amount")
+    public ResponseEntity<List<User>> readCuriousUsers(@RequestParam int question_amount) {
+        List<User> users = userService.readCuriousUsers(question_amount);
+        return new ResponseEntity<>(users, HttpStatus.OK);
+    }
+
+    @SuppressWarnings("checkstyle:ParameterName")
+    @GetMapping("/question_id")
+    public ResponseEntity<List<User>> readDiscussingUsers(@RequestParam Long question_id) {
+        List<User> users = userService.readDiscussingUsers(question_id);
+        return new ResponseEntity<>(users, HttpStatus.OK);
+    }
 }

@@ -7,6 +7,7 @@ import com.example.fakemaleru.repository.AnswerRepository;
 import com.example.fakemaleru.repository.QuestionRepository;
 import com.example.fakemaleru.repository.UserRepository;
 import com.example.fakemaleru.service.AnswerService;
+import com.example.fakemaleru.util.CacheUtil;
 import java.util.List;
 import lombok.AllArgsConstructor;
 import org.springframework.context.annotation.Primary;
@@ -23,6 +24,7 @@ public class AnswerServiceImpl implements AnswerService {
     private final QuestionRepository questionRepository;
     private final String dataNotFoundMessage = "Data not found";
     private final UserRepository userRepository;
+    private final CacheUtil cacheUtil;
 
     @Override
     public List<Answer> readAllAnswers() {
@@ -46,6 +48,7 @@ public class AnswerServiceImpl implements AnswerService {
         Answer answer = answerRepository.findAnswerById(answerNow.getId()).orElseThrow(()
                         -> new ResponseStatusException(HttpStatus.NOT_FOUND, dataNotFoundMessage));
         answer.setContent(answerNow.getContent());
+        cacheUtil.delete("answer_" + answer.getId());
         return answerRepository.save(answer);
     }
 
@@ -54,11 +57,22 @@ public class AnswerServiceImpl implements AnswerService {
         Answer answer = answerRepository.findAnswerById(id).orElseThrow(()
                 -> new ResponseStatusException(HttpStatus.NOT_FOUND, dataNotFoundMessage));
         answerRepository.delete(answer);
+        cacheUtil.delete("answer_" + answer.getId());
     }
 
     @Override
     public Answer findAnswerById(Long id) {
-        return answerRepository.findAnswerById(id).orElseThrow(()
+        String cacheKey = "answer_" + id;
+        Answer cachedUser = cacheUtil.get(cacheKey, Answer.class);
+        if (cachedUser != null) {
+            return cachedUser;
+        }
+        Answer answer = answerRepository.findAnswerById(id).orElseThrow(()
                 -> new ResponseStatusException(HttpStatus.NOT_FOUND, dataNotFoundMessage));
+        if (answer != null) {
+            cacheUtil.put(cacheKey, answer);
+            return answer;
+        }
+        return null;
     }
 }

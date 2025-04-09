@@ -5,6 +5,7 @@ import com.example.fakemaleru.model.User;
 import com.example.fakemaleru.repository.QuestionRepository;
 import com.example.fakemaleru.repository.UserRepository;
 import com.example.fakemaleru.service.QuestionService;
+import com.example.fakemaleru.util.CacheUtil;
 import java.util.List;
 import lombok.AllArgsConstructor;
 import org.springframework.context.annotation.Primary;
@@ -18,6 +19,7 @@ import org.springframework.web.server.ResponseStatusException;
 public class QuestionServiceImpl implements QuestionService {
 
     private final QuestionRepository questionRepository;
+    private final CacheUtil cacheUtil;
     private UserRepository userRepository;
     private final String userNotFoundMessage = "User not found";
 
@@ -29,8 +31,18 @@ public class QuestionServiceImpl implements QuestionService {
 
     @Override
     public Question readQuestionById(Long id) {
-        return questionRepository.findQuestionById(id).orElseThrow(()
+        String cacheKey = "question_" + id;
+        Question cachedUser = cacheUtil.get(cacheKey, Question.class);
+        if (cachedUser != null) {
+            return cachedUser;
+        }
+        Question question = questionRepository.findQuestionById(id).orElseThrow(()
                 -> new ResponseStatusException(HttpStatus.NOT_FOUND, userNotFoundMessage));
+        if (question != null) {
+            cacheUtil.put(cacheKey, question);
+            return question;
+        }
+        return null;
     }
 
     @Override
@@ -47,6 +59,7 @@ public class QuestionServiceImpl implements QuestionService {
         Question question = questionRepository.findQuestionById(id).orElseThrow(()
                 -> new ResponseStatusException(HttpStatus.NOT_FOUND, userNotFoundMessage));
         questionRepository.delete(question);
+        cacheUtil.delete("question_" + id);
     }
 
     @Override
@@ -55,6 +68,7 @@ public class QuestionServiceImpl implements QuestionService {
                 -> new ResponseStatusException(HttpStatus.NOT_FOUND, userNotFoundMessage));
         question.setContent(questionNow.getContent());
         question.setTitle(questionNow.getTitle());
+        cacheUtil.delete("question_" + question.getId());
         return questionRepository.save(question);
     }
 }
