@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/fakemailru/answers")
+@RequestMapping("/answers")
 @AllArgsConstructor
 
 public class AnswerController {
@@ -30,10 +30,10 @@ public class AnswerController {
     }
 
     @SuppressWarnings({"checkstyle:WhitespaceAround", "checkstyle:ParameterName"})
-    @PostMapping("save/{user_email}/{question_id}")
-    public Answer createAnswer(@PathVariable String user_email,
+    @PostMapping("save/{user_id}/{question_id}")
+    public Answer createAnswer(@PathVariable Long user_id,
                                @PathVariable Long question_id, @RequestBody Answer answer) {
-        return answerService.createAnswer(user_email, question_id, answer);
+        return answerService.createAnswer(user_id, question_id, answer);
     }
 
     @SuppressWarnings("checkstyle:WhitespaceAround")

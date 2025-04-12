@@ -6,7 +6,7 @@ import java.util.List;
 public interface AnswerService {
     List<Answer> readAllAnswers();
 
-    Answer createAnswer(String userEmail, Long questionId, Answer answer);
+    Answer createAnswer(Long userId, Long questionId, Answer answer);
 
     Answer updateAnswer(Answer answer);
 

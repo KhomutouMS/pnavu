@@ -46,8 +46,8 @@ public class QuestionServiceImpl implements QuestionService {
     }
 
     @Override
-    public Question createQuestion(String userEmail, Question questionNow) {
-        User user = userRepository.findUserByEmail(userEmail)
+    public Question createQuestion(Long userId, Question questionNow) {
+        User user = userRepository.findUserById(userId)
                 .orElseThrow(() -> new RuntimeException("User not found"));
 
         questionNow.setUser(user);

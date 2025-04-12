@@ -34,33 +34,33 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User updateUser(User newUser) {
-        User user = userRepository.findUserByEmail(newUser.getEmail()).orElseThrow(()
+        User user = userRepository.findUserById(newUser.getId()).orElseThrow(()
                 -> new ResponseStatusException(HttpStatus.NOT_FOUND, userNotFoundMessage));
         user.setUsername(newUser.getUsername());
         user.setPassword(newUser.getPassword());
-        cacheUtil.delete("user_" + user.getEmail());
+        cacheUtil.delete("user_" + user.getId());
         return userRepository.save(user);
     }
 
     @SuppressWarnings("checkstyle:Indentation")
     @Override
-    public void deleteUserByEmail(String email) {
+    public void deleteUserById(Long id) {
 
-        User user = userRepository.findUserByEmail(email).orElseThrow(()
+        User user = userRepository.findUserById(id).orElseThrow(()
                 -> new ResponseStatusException(HttpStatus.NOT_FOUND, userNotFoundMessage));
         userRepository.delete(user);
-        cacheUtil.delete("user_" + email);
+        cacheUtil.delete("user_" + id);
     }
 
 
     @Override
-    public User readUserByEmail(String email) {
-        String cacheKey = "user_" + email;
+    public User readUserById(Long id) {
+        String cacheKey = "user_" + id;
         User cachedUser = cacheUtil.get(cacheKey, User.class);
         if (cachedUser != null) {
             return cachedUser;
         }
-        User user = userRepository.findUserByEmail(email).orElseThrow(()
+        User user = userRepository.findUserById(id).orElseThrow(()
                 -> new ResponseStatusException(HttpStatus.NOT_FOUND, userNotFoundMessage));
         if (user != null) {
             cacheUtil.put(cacheKey, user);
@@ -77,8 +77,8 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public List<User> readDiscussingUsers(Long questionId) {
-        return userRepository.findDiscussingUsers(questionId).stream()
+    public List<User> readDiscussingUsers(String titleFragment) {
+        return userRepository.findDiscussingUsers(titleFragment).stream()
                 .toList();
     }
 }

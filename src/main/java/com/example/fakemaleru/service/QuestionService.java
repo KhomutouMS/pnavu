@@ -8,7 +8,7 @@ public interface QuestionService {
 
     Question readQuestionById(Long id);
 
-    Question createQuestion(String userEmail, Question question);
+    Question createQuestion(Long userId, Question question);
 
     void deleteQuestionById(Long id);
 

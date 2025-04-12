@@ -33,10 +33,10 @@ public class AnswerServiceImpl implements AnswerService {
     }
 
     @Override
-    public Answer createAnswer(String userEmail, Long questionId, Answer answerNow) {
+    public Answer createAnswer(Long userId, Long questionId, Answer answerNow) {
         Question question = questionRepository.findQuestionById(questionId).orElseThrow(()
                 -> new ResponseStatusException(HttpStatus.NOT_FOUND, dataNotFoundMessage));
-        User user = userRepository.findUserByEmail(userEmail).orElseThrow(()
+        User user = userRepository.findUserById(userId).orElseThrow(()
                 -> new ResponseStatusException(HttpStatus.NOT_FOUND, dataNotFoundMessage));
         answerNow.setQuestion(question);
         answerNow.setUser(user);

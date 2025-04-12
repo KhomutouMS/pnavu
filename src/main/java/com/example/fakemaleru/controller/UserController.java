@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @SuppressWarnings({"checkstyle:TypeName", "checkstyle:OuterTypeFilename"})
 @RestController
-@RequestMapping("/fakemailru/users")
+@RequestMapping("/users")
 
 @AllArgsConstructor
 
@@ -37,9 +37,9 @@ public class UserController {
         return userService.createUser(newUser);
     }
 
-    @GetMapping("/{email}")
-    public User readUserByEmail(@PathVariable String email) {
-        return userService.readUserByEmail(email);
+    @GetMapping("/{id}")
+    public User readUserById(@PathVariable Long id) {
+        return userService.readUserById(id);
     }
 
     @PutMapping("update")
@@ -47,14 +47,14 @@ public class UserController {
         return userService.updateUser(newUser);
     }
 
-    @DeleteMapping("delete/{email}")
-    public void deleteUser(@PathVariable String email) {
-        userService.deleteUserByEmail(email);
+    @DeleteMapping("delete/{id}")
+    public void deleteUser(@PathVariable Long id) {
+        userService.deleteUserById(id);
     }
 
     @GetMapping("/saerch")
-    public User raedUserByEmailQuery(@RequestParam String email) {
-        return userService.readUserByEmail(email);
+    public User raedUserByEmailQuery(@RequestParam Long id) {
+        return userService.readUserById(id);
     }
 
     @SuppressWarnings("checkstyle:ParameterName")
@@ -65,9 +65,9 @@ public class UserController {
     }
 
     @SuppressWarnings("checkstyle:ParameterName")
-    @GetMapping("/question_id")
-    public ResponseEntity<List<User>> readDiscussingUsers(@RequestParam Long question_id) {
-        List<User> users = userService.readDiscussingUsers(question_id);
+    @GetMapping("/title")
+    public ResponseEntity<List<User>> readDiscussingUsers(@RequestParam String title) {
+        List<User> users = userService.readDiscussingUsers(title);
         return new ResponseEntity<>(users, HttpStatus.OK);
     }
 }

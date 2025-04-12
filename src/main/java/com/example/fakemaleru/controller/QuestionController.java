@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 
 @RestController
-@RequestMapping("/fakemailru/questions")
+@RequestMapping("/questions")
 @AllArgsConstructor
 public class QuestionController {
     private QuestionService questionService;
@@ -29,9 +29,9 @@ public class QuestionController {
     }
 
     @SuppressWarnings({"checkstyle:WhitespaceAround", "checkstyle:ParameterName"})
-    @PostMapping("save/{user_email}")
-    public Question createQuestion(@PathVariable String user_email, @RequestBody Question question){
-        return questionService.createQuestion(user_email, question);
+    @PostMapping("save/{user_id}")
+    public Question createQuestion(@PathVariable Long user_id, @RequestBody Question question){
+        return questionService.createQuestion(user_id, question);
     }
 
     @SuppressWarnings("checkstyle:WhitespaceAround")

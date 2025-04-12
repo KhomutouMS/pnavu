@@ -24,12 +24,12 @@ public class User {
     @Column(unique = true)
     private String email;
 
-    @OneToMany(mappedBy = "user", cascade = {CascadeType.PERSIST, CascadeType.MERGE},
+    @OneToMany(mappedBy = "user", cascade = {CascadeType.ALL, CascadeType.MERGE},
             fetch = FetchType.EAGER)
 
     private List<Question> questions;
 
-    @OneToMany(mappedBy = "user", cascade = {CascadeType.PERSIST, CascadeType.MERGE},
+    @OneToMany(mappedBy = "user", cascade = {CascadeType.ALL, CascadeType.MERGE},
             fetch = FetchType.LAZY)
 
     private List<Answer> answers;
