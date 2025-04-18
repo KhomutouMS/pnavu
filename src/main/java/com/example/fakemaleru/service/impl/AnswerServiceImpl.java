@@ -1,5 +1,7 @@
 package com.example.fakemaleru.service.impl;
 
+import com.example.fakemaleru.exceptions.DataNotFound;
+import com.example.fakemaleru.exceptions.WrongRequest;
 import com.example.fakemaleru.model.Answer;
 import com.example.fakemaleru.model.Question;
 import com.example.fakemaleru.model.User;
@@ -11,9 +13,7 @@ import com.example.fakemaleru.util.CacheUtil;
 import java.util.List;
 import lombok.AllArgsConstructor;
 import org.springframework.context.annotation.Primary;
-import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
-import org.springframework.web.server.ResponseStatusException;
 
 @Service
 @AllArgsConstructor
@@ -22,7 +22,6 @@ public class AnswerServiceImpl implements AnswerService {
 
     private final AnswerRepository answerRepository;
     private final QuestionRepository questionRepository;
-    private final String dataNotFoundMessage = "Data not found";
     private final UserRepository userRepository;
     private final CacheUtil cacheUtil;
 
@@ -34,10 +33,13 @@ public class AnswerServiceImpl implements AnswerService {
 
     @Override
     public Answer createAnswer(Long userId, Long questionId, Answer answerNow) {
+        if (answerNow == null) {
+            throw new WrongRequest("Your request is empty.");
+        }
         Question question = questionRepository.findQuestionById(questionId).orElseThrow(()
-                -> new ResponseStatusException(HttpStatus.NOT_FOUND, dataNotFoundMessage));
+                -> new DataNotFound("Question " + questionId + " not found"));
         User user = userRepository.findUserById(userId).orElseThrow(()
-                -> new ResponseStatusException(HttpStatus.NOT_FOUND, dataNotFoundMessage));
+                -> new DataNotFound("User " + userId + " not found"));
         answerNow.setQuestion(question);
         answerNow.setUser(user);
         return answerRepository.save(answerNow);
@@ -45,19 +47,22 @@ public class AnswerServiceImpl implements AnswerService {
 
     @Override
     public Answer updateAnswer(Answer answerNow) {
+        if (answerNow == null) {
+            throw new WrongRequest("Your request is empty.");
+        }
         Answer answer = answerRepository.findAnswerById(answerNow.getId()).orElseThrow(()
-                        -> new ResponseStatusException(HttpStatus.NOT_FOUND, dataNotFoundMessage));
+                        -> new DataNotFound("Answer " + answerNow.getId() + " not found"));
         answer.setContent(answerNow.getContent());
-        cacheUtil.delete("answer_" + answer.getId());
+        cacheUtil.evict("answer_" + answer.getId());
         return answerRepository.save(answer);
     }
 
     @Override
     public void deleteAnswerById(Long id) {
         Answer answer = answerRepository.findAnswerById(id).orElseThrow(()
-                -> new ResponseStatusException(HttpStatus.NOT_FOUND, dataNotFoundMessage));
+                -> new DataNotFound("Answer " + id + " not found"));
         answerRepository.delete(answer);
-        cacheUtil.delete("answer_" + answer.getId());
+        cacheUtil.evict("answer_" + answer.getId());
     }
 
     @Override
@@ -68,7 +73,7 @@ public class AnswerServiceImpl implements AnswerService {
             return cachedUser;
         }
         Answer answer = answerRepository.findAnswerById(id).orElseThrow(()
-                -> new ResponseStatusException(HttpStatus.NOT_FOUND, dataNotFoundMessage));
+                -> new DataNotFound("Answer " + id + " not found"));
         if (answer != null) {
             cacheUtil.put(cacheKey, answer);
             return answer;

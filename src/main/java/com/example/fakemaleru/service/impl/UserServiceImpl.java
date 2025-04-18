@@ -1,5 +1,8 @@
 package com.example.fakemaleru.service.impl;
 
+import com.example.fakemaleru.exceptions.ConflictException;
+import com.example.fakemaleru.exceptions.DataNotFound;
+import com.example.fakemaleru.exceptions.WrongRequest;
 import com.example.fakemaleru.model.User;
 import com.example.fakemaleru.repository.UserRepository;
 import com.example.fakemaleru.service.UserService;
@@ -7,9 +10,8 @@ import com.example.fakemaleru.util.CacheUtil;
 import java.util.List;
 import lombok.AllArgsConstructor;
 import org.springframework.context.annotation.Primary;
-import org.springframework.http.HttpStatus;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
-import org.springframework.web.server.ResponseStatusException;
 
 
 @Service
@@ -18,7 +20,6 @@ import org.springframework.web.server.ResponseStatusException;
 public class UserServiceImpl implements UserService {
 
     private final UserRepository userRepository;
-    private final String userNotFoundMessage = "User not found";
     private final CacheUtil cacheUtil;
 
     @Override
@@ -29,27 +30,36 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User createUser(User newUser) {
-        return userRepository.save(newUser);
+        if (newUser == null || newUser.getEmail() == null) {
+            throw new WrongRequest("Your request is empty.");
+        }
+        try {
+            return userRepository.save(newUser);
+        } catch (DataIntegrityViolationException e) {
+            throw new ConflictException("Email " + newUser.getEmail() + " already exists.");
+        }
     }
 
     @Override
     public User updateUser(User newUser) {
+        if (newUser == null) {
+            throw new WrongRequest("Your request is empty.");
+        }
         User user = userRepository.findUserById(newUser.getId()).orElseThrow(()
-                -> new ResponseStatusException(HttpStatus.NOT_FOUND, userNotFoundMessage));
+                -> new DataNotFound("User " + newUser.getId() + " not found"));
         user.setUsername(newUser.getUsername());
         user.setPassword(newUser.getPassword());
-        cacheUtil.delete("user_" + user.getId());
+        cacheUtil.evict("user_" + user.getId());
         return userRepository.save(user);
     }
 
-    @SuppressWarnings("checkstyle:Indentation")
     @Override
     public void deleteUserById(Long id) {
 
         User user = userRepository.findUserById(id).orElseThrow(()
-                -> new ResponseStatusException(HttpStatus.NOT_FOUND, userNotFoundMessage));
+                -> new DataNotFound("User " + id + " not found"));
         userRepository.delete(user);
-        cacheUtil.delete("user_" + id);
+        cacheUtil.evict("user_" + id);
     }
 
 
@@ -61,7 +71,7 @@ public class UserServiceImpl implements UserService {
             return cachedUser;
         }
         User user = userRepository.findUserById(id).orElseThrow(()
-                -> new ResponseStatusException(HttpStatus.NOT_FOUND, userNotFoundMessage));
+                -> new DataNotFound("User " + id + " not found"));
         if (user != null) {
             cacheUtil.put(cacheKey, user);
             return user;

@@ -34,7 +34,7 @@ public class CacheUtil {
         log.info("ADDED TO CACHE: {}", key);
     }
 
-    public void delete(String key) {
+    public void evict(String key) {
         cache.remove(key);
         log.info("DELETED FROM CACHE: {}", key);
     }
