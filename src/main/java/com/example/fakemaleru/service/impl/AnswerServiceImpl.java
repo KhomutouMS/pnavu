@@ -36,6 +36,9 @@ public class AnswerServiceImpl implements AnswerService {
         if (answerNow == null) {
             throw new WrongRequest("Your request is empty.");
         }
+        if (answerNow.getContent() == null) {
+            throw new WrongRequest("Your content is empty.");
+        }
         Question question = questionRepository.findQuestionById(questionId).orElseThrow(()
                 -> new DataNotFound("Question " + questionId + " not found"));
         User user = userRepository.findUserById(userId).orElseThrow(()
@@ -49,6 +52,9 @@ public class AnswerServiceImpl implements AnswerService {
     public Answer updateAnswer(Answer answerNow) {
         if (answerNow == null) {
             throw new WrongRequest("Your request is empty.");
+        }
+        if (answerNow.getContent() == null) {
+            throw new WrongRequest("Your content is empty.");
         }
         Answer answer = answerRepository.findAnswerById(answerNow.getId()).orElseThrow(()
                         -> new DataNotFound("Answer " + answerNow.getId() + " not found"));

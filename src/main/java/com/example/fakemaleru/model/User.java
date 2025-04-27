@@ -10,10 +10,12 @@ import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import java.util.List;
 import lombok.Data;
+import lombok.ToString;
 
 @Data
 @Entity
 @Table(name = "users")
+@ToString
 public class User {
     @Id
     @GeneratedValue
@@ -26,11 +28,11 @@ public class User {
 
     @OneToMany(mappedBy = "user", cascade = {CascadeType.ALL, CascadeType.MERGE},
             fetch = FetchType.EAGER)
-
+    @ToString.Exclude
     private List<Question> questions;
 
     @OneToMany(mappedBy = "user", cascade = {CascadeType.ALL, CascadeType.MERGE},
             fetch = FetchType.LAZY)
-
+    @ToString.Exclude
     private List<Answer> answers;
 }

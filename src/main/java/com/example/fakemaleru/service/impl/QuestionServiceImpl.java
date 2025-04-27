@@ -49,6 +49,12 @@ public class QuestionServiceImpl implements QuestionService {
         if (questionNow == null) {
             throw new WrongRequest("Your request is empty.");
         }
+        if (questionNow.getContent() == null) {
+            throw new WrongRequest("Your content is empty.");
+        }
+        if (questionNow.getTitle() == null) {
+            throw new WrongRequest("Your title is empty.");
+        }
         User user = userRepository.findUserById(userId)
                 .orElseThrow(() -> new DataNotFound("User " + userId + " not found"));
         questionNow.setUser(user);
@@ -67,6 +73,12 @@ public class QuestionServiceImpl implements QuestionService {
     public Question updateQuestion(Question questionNow) {
         if (questionNow == null) {
             throw new WrongRequest("Your request is empty.");
+        }
+        if (questionNow.getContent() == null) {
+            throw new WrongRequest("Your content is empty.");
+        }
+        if (questionNow.getTitle() == null) {
+            throw new WrongRequest("Your title is empty.");
         }
         Question question = questionRepository.findQuestionById(questionNow.getId()).orElseThrow(()
                 -> new DataNotFound("Question " + questionNow.getId() + " not found"));

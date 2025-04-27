@@ -30,8 +30,17 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User createUser(User newUser) {
-        if (newUser == null || newUser.getEmail() == null) {
+        if (newUser == null) {
             throw new WrongRequest("Your request is empty.");
+        }
+        if (newUser.getUsername() == null) {
+            throw new WrongRequest("Your username is empty.");
+        }
+        if (newUser.getEmail() == null) {
+            throw new WrongRequest("Your Email is empty.");
+        }
+        if (newUser.getPassword() == null) {
+            throw new WrongRequest("Your password is empty.");
         }
         try {
             return userRepository.save(newUser);
@@ -44,6 +53,12 @@ public class UserServiceImpl implements UserService {
     public User updateUser(User newUser) {
         if (newUser == null) {
             throw new WrongRequest("Your request is empty.");
+        }
+        if (newUser.getUsername() == null) {
+            throw new WrongRequest("Your username is empty.");
+        }
+        if (newUser.getPassword() == null) {
+            throw new WrongRequest("Your password is empty.");
         }
         User user = userRepository.findUserById(newUser.getId()).orElseThrow(()
                 -> new DataNotFound("User " + newUser.getId() + " not found"));

@@ -1,10 +1,8 @@
 package com.example.fakemaleru.controller;
 
-import com.example.fakemaleru.exceptions.WrongRequest;
 import com.example.fakemaleru.model.User;
 import com.example.fakemaleru.service.UserService;
 import io.swagger.v3.oas.annotations.Operation;
-import io.swagger.v3.oas.annotations.parameters.RequestBody;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import java.util.List;
@@ -16,11 +14,11 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-@SuppressWarnings({"checkstyle:TypeName", "checkstyle:OuterTypeFilename"})
 @RestController
 @RequestMapping("/users")
 
@@ -29,18 +27,16 @@ import org.springframework.web.bind.annotation.RestController;
 public class UserController {
     private UserService userService;
 
-
     @Operation(summary = "Retrieve all users",
             description = "Fetch a list of all users from the database.")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "200",
+        @ApiResponse(responseCode = "200",
                     description = "Successfully retrieved list of users"),
-            @ApiResponse(responseCode = "500", description = "Internal server error")
+        @ApiResponse(responseCode = "500", description = "Internal server error")
     })
-    @SuppressWarnings({"checkstyle:EmptyLineSeparator", "checkstyle:WhitespaceAround",
-            "checkstyle:MethodName", "checkstyle:Indentation"})
+
     @GetMapping
-    public ResponseEntity<List<User>> readAllUsers(){
+    public ResponseEntity<List<User>> readAllUsers() {
         List<User> users = userService.readAllUsers();
         return new ResponseEntity<>(users, HttpStatus.OK);
     }
@@ -143,13 +139,4 @@ public class UserController {
         return new ResponseEntity<>(users, HttpStatus.OK);
     }
 
-    @RequestMapping("/**")
-    @Operation(summary = "Handle invalid URL",
-            description = "Return an error message for non-existing paths.")
-    @ApiResponses(value = {
-        @ApiResponse(responseCode = "400", description = "Path does NOT exist")
-    })
-    public ResponseEntity<String> handleInvalidUrl() {
-        throw new WrongRequest("Path does NOT exist.");
-    }
 }

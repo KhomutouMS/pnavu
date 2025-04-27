@@ -1,7 +1,6 @@
 package com.example.fakemaleru.controller;
 
 
-import com.example.fakemaleru.exceptions.WrongRequest;
 import com.example.fakemaleru.model.Answer;
 import com.example.fakemaleru.service.AnswerService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -99,14 +98,4 @@ public class AnswerController {
         answerService.deleteAnswerById(id);
     }
 
-
-    @Operation(summary = "Handle invalid URL",
-            description = "Return an error message for non-existing paths.")
-    @ApiResponses(value = {
-        @ApiResponse(responseCode = "400", description = "Path does NOT exist")
-    })
-    @RequestMapping("/**")
-    public ResponseEntity<String> handleInvalidUrl() {
-        throw new WrongRequest("Path does NOT exist.");
-    }
 }
