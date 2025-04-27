@@ -139,4 +139,17 @@ public class UserController {
         return new ResponseEntity<>(users, HttpStatus.OK);
     }
 
+    @Operation(summary = "Post new users",
+            description =
+                    "Create new users and save them to database")
+    @ApiResponses(value = {
+        @ApiResponse(responseCode = "200", description = "Successfully retrieved users"),
+        @ApiResponse(responseCode = "400", description = "Bad request"),
+        @ApiResponse(responseCode = "409", description = "Email conflict"),
+        @ApiResponse(responseCode = "500", description = "Internal server error")
+    })
+    @PostMapping("save/bulk")
+    public List<User> saveUsersBulk(@RequestBody List<User> newUsers) {
+        return userService.createUsersBulk(newUsers);
+    }
 }

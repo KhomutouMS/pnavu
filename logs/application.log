@@ -3732,3 +3732,268 @@
 2025-04-24 11:31:46 [SpringApplicationShutdownHook] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
 2025-04-24 11:31:46 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
 2025-04-24 11:31:46 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
+2025-04-27 17:57:39 [main] INFO  c.e.fakemaleru.FakemaleruApplication - Starting FakemaleruApplication using Java 23.0.2 with PID 13332 (D:\jvaProjects\fakemaleru\target\classes started by Admin in D:\jvaProjects\fakemaleru)
+2025-04-27 17:57:39 [main] INFO  c.e.fakemaleru.FakemaleruApplication - No active profile set, falling back to 1 default profile: "default"
+2025-04-27 17:57:40 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-04-27 17:57:40 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 35 ms. Found 3 JPA repository interfaces.
+2025-04-27 17:57:40 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port 8080 (http)
+2025-04-27 17:57:40 [main] INFO  o.a.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8080"]
+2025-04-27 17:57:40 [main] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+2025-04-27 17:57:40 [main] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.36]
+2025-04-27 17:57:40 [main] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2025-04-27 17:57:40 [main] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 996 ms
+2025-04-27 17:57:40 [main] INFO  o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
+2025-04-27 17:57:40 [main] INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 6.6.8.Final
+2025-04-27 17:57:40 [main] INFO  o.h.c.i.RegionFactoryInitiator - HHH000026: Second-level cache disabled
+2025-04-27 17:57:41 [main] INFO  o.s.o.j.p.SpringPersistenceUnitInfo - No LoadTimeWeaver setup: ignoring JPA class transformer
+2025-04-27 17:57:41 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2025-04-27 17:57:41 [main] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@dde6f87
+2025-04-27 17:57:41 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2025-04-27 17:57:41 [main] WARN  org.hibernate.orm.deprecation - HHH90000025: PostgreSQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2025-04-27 17:57:41 [main] INFO  o.hibernate.orm.connections.pooling - HHH10001005: Database info:
+	Database JDBC URL [Connecting through datasource 'HikariDataSource (HikariPool-1)']
+	Database driver: undefined/unknown
+	Database version: 17.4
+	Autocommit mode: undefined/unknown
+	Isolation level: undefined/unknown
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2025-04-27 17:57:41 [main] INFO  o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2025-04-27 17:57:42 [main] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-04-27 17:57:42 [main] INFO  o.s.d.j.r.query.QueryEnhancerFactory - Hibernate is in classpath; If applicable, HQL parser will be used.
+2025-04-27 17:57:42 [main] WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-04-27 17:57:42 [main] INFO  o.s.v.b.OptionalValidatorFactoryBean - Failed to set up a Bean Validation provider: jakarta.validation.NoProviderFoundException: Unable to create a Configuration, because no Jakarta Bean Validation provider could be found. Add a provider like Hibernate Validator (RI) to your classpath.
+2025-04-27 17:57:43 [main] INFO  o.a.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8080"]
+2025-04-27 17:57:43 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port 8080 (http) with context path '/'
+2025-04-27 17:57:43 [main] INFO  c.e.fakemaleru.FakemaleruApplication - Started FakemaleruApplication in 3.798 seconds (process running for 4.298)
+2025-04-27 17:59:24 [http-nio-8080-exec-3] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2025-04-27 17:59:24 [http-nio-8080-exec-3] INFO  o.s.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+2025-04-27 17:59:24 [http-nio-8080-exec-3] INFO  o.s.web.servlet.DispatcherServlet - Completed initialization in 0 ms
+2025-04-27 17:59:24 [http-nio-8080-exec-3] INFO  c.e.fakemaleru.aspect.LoggingAspect - Enter: com.example.fakemaleru.controller.UserController.saveUsersBulk() with argument[s] = [[User(id=null, username=user1, password=password123, email=user1@example.com), User(id=null, username=user2, password=password456, email=user2@example.com), User(id=null, username=user3, password=password789, email=user3@example.com)]]
+2025-04-27 17:59:24 [http-nio-8080-exec-3] INFO  c.e.fakemaleru.aspect.LoggingAspect - Enter: com.example.fakemaleru.service.impl.UserServiceImpl.createUsersBulk() with argument[s] = [[User(id=null, username=user1, password=password123, email=user1@example.com), User(id=null, username=user2, password=password456, email=user2@example.com), User(id=null, username=user3, password=password789, email=user3@example.com)]]
+2025-04-27 17:59:24 [http-nio-8080-exec-3] INFO  c.e.fakemaleru.aspect.LoggingAspect - Exit: com.example.fakemaleru.service.impl.UserServiceImpl.createUsersBulk() with result = [User(id=352, username=user1, password=password123, email=user1@example.com), User(id=353, username=user2, password=password456, email=user2@example.com), User(id=354, username=user3, password=password789, email=user3@example.com)]
+2025-04-27 17:59:24 [http-nio-8080-exec-3] INFO  c.e.fakemaleru.aspect.LoggingAspect - Exit: com.example.fakemaleru.controller.UserController.saveUsersBulk() with result = [User(id=352, username=user1, password=password123, email=user1@example.com), User(id=353, username=user2, password=password456, email=user2@example.com), User(id=354, username=user3, password=password789, email=user3@example.com)]
+2025-04-27 17:59:29 [http-nio-8080-exec-7] INFO  c.e.fakemaleru.aspect.LoggingAspect - Enter: com.example.fakemaleru.controller.UserController.readAllUsers() with argument[s] = []
+2025-04-27 17:59:29 [http-nio-8080-exec-7] INFO  c.e.fakemaleru.aspect.LoggingAspect - Enter: com.example.fakemaleru.service.impl.UserServiceImpl.readAllUsers() with argument[s] = []
+2025-04-27 17:59:29 [http-nio-8080-exec-7] INFO  c.e.fakemaleru.aspect.LoggingAspect - Exit: com.example.fakemaleru.service.impl.UserServiceImpl.readAllUsers() with result = [User(id=2, username=grisha, password=Apple, email=lool@gmail.com), User(id=3, username=donald, password=Apbuz, email=ronald@gmail.com), User(id=252, username=exampleUser, password=examplePassword, email=user@example.com), User(id=352, username=user1, password=password123, email=user1@example.com), User(id=353, username=user2, password=password456, email=user2@example.com), User(id=354, username=user3, password=password789, email=user3@example.com)]
+2025-04-27 17:59:29 [http-nio-8080-exec-7] INFO  c.e.fakemaleru.aspect.LoggingAspect - Exit: com.example.fakemaleru.controller.UserController.readAllUsers() with result = <200 OK OK,[User(id=2, username=grisha, password=Apple, email=lool@gmail.com), User(id=3, username=donald, password=Apbuz, email=ronald@gmail.com), User(id=252, username=exampleUser, password=examplePassword, email=user@example.com), User(id=352, username=user1, password=password123, email=user1@example.com), User(id=353, username=user2, password=password456, email=user2@example.com), User(id=354, username=user3, password=password789, email=user3@example.com)],[]>
+2025-04-27 20:41:41 [SpringApplicationShutdownHook] INFO  o.s.b.w.e.tomcat.GracefulShutdown - Commencing graceful shutdown. Waiting for active requests to complete
+2025-04-27 20:41:41 [tomcat-shutdown] INFO  o.s.b.w.e.tomcat.GracefulShutdown - Graceful shutdown complete
+2025-04-27 20:41:41 [SpringApplicationShutdownHook] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
+2025-04-27 20:41:41 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
+2025-04-27 20:41:41 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
+2025-04-27 21:09:30 [main] INFO  c.e.f.FakemaleruApplicationTests - Starting FakemaleruApplicationTests using Java 23.0.2 with PID 7588 (started by Admin in D:\jvaProjects\fakemaleru)
+2025-04-27 21:09:30 [main] INFO  c.e.f.FakemaleruApplicationTests - No active profile set, falling back to 1 default profile: "default"
+2025-04-27 21:09:31 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-04-27 21:09:31 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 41 ms. Found 3 JPA repository interfaces.
+2025-04-27 21:09:31 [main] INFO  o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
+2025-04-27 21:09:31 [main] INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 6.6.8.Final
+2025-04-27 21:09:31 [main] INFO  o.h.c.i.RegionFactoryInitiator - HHH000026: Second-level cache disabled
+2025-04-27 21:09:31 [main] INFO  o.s.o.j.p.SpringPersistenceUnitInfo - No LoadTimeWeaver setup: ignoring JPA class transformer
+2025-04-27 21:09:31 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2025-04-27 21:09:32 [main] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@417b3642
+2025-04-27 21:09:32 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2025-04-27 21:09:32 [main] WARN  org.hibernate.orm.deprecation - HHH90000025: PostgreSQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2025-04-27 21:09:32 [main] INFO  o.hibernate.orm.connections.pooling - HHH10001005: Database info:
+	Database JDBC URL [Connecting through datasource 'HikariDataSource (HikariPool-1)']
+	Database driver: undefined/unknown
+	Database version: 17.4
+	Autocommit mode: undefined/unknown
+	Isolation level: undefined/unknown
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2025-04-27 21:09:32 [main] INFO  o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2025-04-27 21:09:32 [main] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-04-27 21:09:33 [main] INFO  o.s.d.j.r.query.QueryEnhancerFactory - Hibernate is in classpath; If applicable, HQL parser will be used.
+2025-04-27 21:09:33 [main] WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-04-27 21:09:33 [main] INFO  o.s.v.b.OptionalValidatorFactoryBean - Failed to set up a Bean Validation provider: jakarta.validation.NoProviderFoundException: Unable to create a Configuration, because no Jakarta Bean Validation provider could be found. Add a provider like Hibernate Validator (RI) to your classpath.
+2025-04-27 21:09:34 [main] INFO  c.e.f.FakemaleruApplicationTests - Started FakemaleruApplicationTests in 3.997 seconds (process running for 5.53)
+2025-04-27 21:09:34 [SpringApplicationShutdownHook] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
+2025-04-27 21:09:34 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
+2025-04-27 21:09:34 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
+2025-04-27 21:11:37 [main] INFO  c.e.f.FakemaleruApplicationTests - Starting FakemaleruApplicationTests using Java 23.0.2 with PID 4296 (started by Admin in D:\jvaProjects\fakemaleru)
+2025-04-27 21:11:37 [main] INFO  c.e.f.FakemaleruApplicationTests - No active profile set, falling back to 1 default profile: "default"
+2025-04-27 21:11:38 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-04-27 21:11:38 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 55 ms. Found 3 JPA repository interfaces.
+2025-04-27 21:11:39 [main] INFO  o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
+2025-04-27 21:11:39 [main] INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 6.6.8.Final
+2025-04-27 21:11:39 [main] INFO  o.h.c.i.RegionFactoryInitiator - HHH000026: Second-level cache disabled
+2025-04-27 21:11:39 [main] INFO  o.s.o.j.p.SpringPersistenceUnitInfo - No LoadTimeWeaver setup: ignoring JPA class transformer
+2025-04-27 21:11:39 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2025-04-27 21:11:39 [main] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@39c40893
+2025-04-27 21:11:39 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2025-04-27 21:11:39 [main] WARN  org.hibernate.orm.deprecation - HHH90000025: PostgreSQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2025-04-27 21:11:39 [main] INFO  o.hibernate.orm.connections.pooling - HHH10001005: Database info:
+	Database JDBC URL [Connecting through datasource 'HikariDataSource (HikariPool-1)']
+	Database driver: undefined/unknown
+	Database version: 17.4
+	Autocommit mode: undefined/unknown
+	Isolation level: undefined/unknown
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2025-04-27 21:11:40 [main] INFO  o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2025-04-27 21:11:41 [main] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-04-27 21:11:41 [main] INFO  o.s.d.j.r.query.QueryEnhancerFactory - Hibernate is in classpath; If applicable, HQL parser will be used.
+2025-04-27 21:11:42 [main] WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-04-27 21:11:42 [main] INFO  o.s.v.b.OptionalValidatorFactoryBean - Failed to set up a Bean Validation provider: jakarta.validation.NoProviderFoundException: Unable to create a Configuration, because no Jakarta Bean Validation provider could be found. Add a provider like Hibernate Validator (RI) to your classpath.
+2025-04-27 21:11:43 [main] INFO  c.e.f.FakemaleruApplicationTests - Started FakemaleruApplicationTests in 5.649 seconds (process running for 8.566)
+2025-04-27 21:11:43 [SpringApplicationShutdownHook] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
+2025-04-27 21:11:43 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
+2025-04-27 21:11:43 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
+2025-04-27 21:14:14 [main] INFO  c.e.f.FakemaleruApplicationTests - Starting FakemaleruApplicationTests using Java 23.0.2 with PID 3792 (started by Admin in D:\jvaProjects\fakemaleru)
+2025-04-27 21:14:14 [main] INFO  c.e.f.FakemaleruApplicationTests - No active profile set, falling back to 1 default profile: "default"
+2025-04-27 21:14:14 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-04-27 21:14:14 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 49 ms. Found 3 JPA repository interfaces.
+2025-04-27 21:14:15 [main] INFO  o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
+2025-04-27 21:14:15 [main] INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 6.6.8.Final
+2025-04-27 21:14:15 [main] INFO  o.h.c.i.RegionFactoryInitiator - HHH000026: Second-level cache disabled
+2025-04-27 21:14:15 [main] INFO  o.s.o.j.p.SpringPersistenceUnitInfo - No LoadTimeWeaver setup: ignoring JPA class transformer
+2025-04-27 21:14:15 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2025-04-27 21:14:16 [main] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@3e71985d
+2025-04-27 21:14:16 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2025-04-27 21:14:16 [main] WARN  org.hibernate.orm.deprecation - HHH90000025: PostgreSQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2025-04-27 21:14:16 [main] INFO  o.hibernate.orm.connections.pooling - HHH10001005: Database info:
+	Database JDBC URL [Connecting through datasource 'HikariDataSource (HikariPool-1)']
+	Database driver: undefined/unknown
+	Database version: 17.4
+	Autocommit mode: undefined/unknown
+	Isolation level: undefined/unknown
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2025-04-27 21:14:17 [main] INFO  o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2025-04-27 21:14:17 [main] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-04-27 21:14:17 [main] INFO  o.s.d.j.r.query.QueryEnhancerFactory - Hibernate is in classpath; If applicable, HQL parser will be used.
+2025-04-27 21:14:18 [main] WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-04-27 21:14:18 [main] INFO  o.s.v.b.OptionalValidatorFactoryBean - Failed to set up a Bean Validation provider: jakarta.validation.NoProviderFoundException: Unable to create a Configuration, because no Jakarta Bean Validation provider could be found. Add a provider like Hibernate Validator (RI) to your classpath.
+2025-04-27 21:14:19 [main] INFO  c.e.f.FakemaleruApplicationTests - Started FakemaleruApplicationTests in 5.754 seconds (process running for 8.691)
+2025-04-27 21:14:19 [SpringApplicationShutdownHook] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
+2025-04-27 21:14:19 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
+2025-04-27 21:14:19 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
+2025-04-27 21:18:51 [main] INFO  c.e.f.FakemaleruApplicationTests - Starting FakemaleruApplicationTests using Java 23.0.2 with PID 2452 (started by Admin in D:\jvaProjects\fakemaleru)
+2025-04-27 21:18:51 [main] INFO  c.e.f.FakemaleruApplicationTests - No active profile set, falling back to 1 default profile: "default"
+2025-04-27 21:18:52 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-04-27 21:18:52 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 48 ms. Found 3 JPA repository interfaces.
+2025-04-27 21:18:53 [main] INFO  o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
+2025-04-27 21:18:53 [main] INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 6.6.8.Final
+2025-04-27 21:18:53 [main] INFO  o.h.c.i.RegionFactoryInitiator - HHH000026: Second-level cache disabled
+2025-04-27 21:18:53 [main] INFO  o.s.o.j.p.SpringPersistenceUnitInfo - No LoadTimeWeaver setup: ignoring JPA class transformer
+2025-04-27 21:18:53 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2025-04-27 21:18:53 [main] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@5d4cf8e1
+2025-04-27 21:18:53 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2025-04-27 21:18:53 [main] WARN  org.hibernate.orm.deprecation - HHH90000025: PostgreSQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2025-04-27 21:18:53 [main] INFO  o.hibernate.orm.connections.pooling - HHH10001005: Database info:
+	Database JDBC URL [Connecting through datasource 'HikariDataSource (HikariPool-1)']
+	Database driver: undefined/unknown
+	Database version: 17.4
+	Autocommit mode: undefined/unknown
+	Isolation level: undefined/unknown
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2025-04-27 21:18:54 [main] INFO  o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2025-04-27 21:18:55 [main] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-04-27 21:18:55 [main] INFO  o.s.d.j.r.query.QueryEnhancerFactory - Hibernate is in classpath; If applicable, HQL parser will be used.
+2025-04-27 21:18:56 [main] WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-04-27 21:18:56 [main] INFO  o.s.v.b.OptionalValidatorFactoryBean - Failed to set up a Bean Validation provider: jakarta.validation.NoProviderFoundException: Unable to create a Configuration, because no Jakarta Bean Validation provider could be found. Add a provider like Hibernate Validator (RI) to your classpath.
+2025-04-27 21:18:57 [main] INFO  c.e.f.FakemaleruApplicationTests - Started FakemaleruApplicationTests in 5.742 seconds (process running for 8.551)
+2025-04-27 21:18:57 [SpringApplicationShutdownHook] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
+2025-04-27 21:18:57 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
+2025-04-27 21:18:57 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
+2025-04-27 21:28:29 [main] INFO  c.e.fakemaleru.FakemaleruApplication - Starting FakemaleruApplication using Java 23.0.2 with PID 3184 (D:\jvaProjects\fakemaleru\target\classes started by Admin in D:\jvaProjects\fakemaleru)
+2025-04-27 21:28:29 [main] INFO  c.e.fakemaleru.FakemaleruApplication - No active profile set, falling back to 1 default profile: "default"
+2025-04-27 21:28:30 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-04-27 21:28:30 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 33 ms. Found 3 JPA repository interfaces.
+2025-04-27 21:28:30 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port 8080 (http)
+2025-04-27 21:28:30 [main] INFO  o.a.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8080"]
+2025-04-27 21:28:30 [main] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+2025-04-27 21:28:30 [main] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.36]
+2025-04-27 21:28:30 [main] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2025-04-27 21:28:30 [main] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 811 ms
+2025-04-27 21:28:30 [main] INFO  o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
+2025-04-27 21:28:30 [main] INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 6.6.8.Final
+2025-04-27 21:28:30 [main] INFO  o.h.c.i.RegionFactoryInitiator - HHH000026: Second-level cache disabled
+2025-04-27 21:28:30 [main] INFO  o.s.o.j.p.SpringPersistenceUnitInfo - No LoadTimeWeaver setup: ignoring JPA class transformer
+2025-04-27 21:28:30 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2025-04-27 21:28:31 [main] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@6294e4a6
+2025-04-27 21:28:31 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2025-04-27 21:28:31 [main] WARN  org.hibernate.orm.deprecation - HHH90000025: PostgreSQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2025-04-27 21:28:31 [main] INFO  o.hibernate.orm.connections.pooling - HHH10001005: Database info:
+	Database JDBC URL [Connecting through datasource 'HikariDataSource (HikariPool-1)']
+	Database driver: undefined/unknown
+	Database version: 17.4
+	Autocommit mode: undefined/unknown
+	Isolation level: undefined/unknown
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2025-04-27 21:28:31 [main] INFO  o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2025-04-27 21:28:31 [main] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-04-27 21:28:31 [main] INFO  o.s.d.j.r.query.QueryEnhancerFactory - Hibernate is in classpath; If applicable, HQL parser will be used.
+2025-04-27 21:28:32 [main] WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-04-27 21:28:32 [main] INFO  o.s.v.b.OptionalValidatorFactoryBean - Failed to set up a Bean Validation provider: jakarta.validation.NoProviderFoundException: Unable to create a Configuration, because no Jakarta Bean Validation provider could be found. Add a provider like Hibernate Validator (RI) to your classpath.
+2025-04-27 21:28:32 [main] INFO  o.a.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8080"]
+2025-04-27 21:28:32 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port 8080 (http) with context path '/'
+2025-04-27 21:28:32 [main] INFO  c.e.fakemaleru.FakemaleruApplication - Started FakemaleruApplication in 3.106 seconds (process running for 3.449)
+2025-04-27 21:28:39 [http-nio-8080-exec-8] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2025-04-27 21:28:39 [http-nio-8080-exec-8] INFO  o.s.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+2025-04-27 21:28:39 [http-nio-8080-exec-8] INFO  o.s.web.servlet.DispatcherServlet - Completed initialization in 0 ms
+2025-04-27 21:28:39 [http-nio-8080-exec-8] INFO  c.e.fakemaleru.aspect.LoggingAspect - Enter: com.example.fakemaleru.controller.UserController.readAllUsers() with argument[s] = []
+2025-04-27 21:28:39 [http-nio-8080-exec-8] INFO  c.e.fakemaleru.aspect.LoggingAspect - Enter: com.example.fakemaleru.service.impl.UserServiceImpl.readAllUsers() with argument[s] = []
+2025-04-27 21:28:39 [http-nio-8080-exec-8] INFO  c.e.fakemaleru.aspect.LoggingAspect - Exit: com.example.fakemaleru.service.impl.UserServiceImpl.readAllUsers() with result = [User(id=2, username=grisha, password=Apple, email=lool@gmail.com), User(id=3, username=donald, password=Apbuz, email=ronald@gmail.com), User(id=252, username=exampleUser, password=examplePassword, email=user@example.com), User(id=352, username=user1, password=password123, email=user1@example.com), User(id=353, username=user2, password=password456, email=user2@example.com), User(id=354, username=user3, password=password789, email=user3@example.com)]
+2025-04-27 21:28:39 [http-nio-8080-exec-8] INFO  c.e.fakemaleru.aspect.LoggingAspect - Exit: com.example.fakemaleru.controller.UserController.readAllUsers() with result = <200 OK OK,[User(id=2, username=grisha, password=Apple, email=lool@gmail.com), User(id=3, username=donald, password=Apbuz, email=ronald@gmail.com), User(id=252, username=exampleUser, password=examplePassword, email=user@example.com), User(id=352, username=user1, password=password123, email=user1@example.com), User(id=353, username=user2, password=password456, email=user2@example.com), User(id=354, username=user3, password=password789, email=user3@example.com)],[]>
+2025-04-27 21:28:47 [SpringApplicationShutdownHook] INFO  o.s.b.w.e.tomcat.GracefulShutdown - Commencing graceful shutdown. Waiting for active requests to complete
+2025-04-27 21:28:47 [tomcat-shutdown] INFO  o.s.b.w.e.tomcat.GracefulShutdown - Graceful shutdown complete
+2025-04-27 21:28:47 [SpringApplicationShutdownHook] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
+2025-04-27 21:28:47 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
+2025-04-27 21:28:47 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
+2025-04-27 21:29:21 [main] INFO  c.e.fakemaleru.FakemaleruApplication - Starting FakemaleruApplication using Java 23.0.2 with PID 8080 (D:\jvaProjects\fakemaleru\target\classes started by Admin in D:\jvaProjects\fakemaleru)
+2025-04-27 21:29:21 [main] INFO  c.e.fakemaleru.FakemaleruApplication - No active profile set, falling back to 1 default profile: "default"
+2025-04-27 21:29:21 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-04-27 21:29:21 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 32 ms. Found 3 JPA repository interfaces.
+2025-04-27 21:29:22 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port 8080 (http)
+2025-04-27 21:29:22 [main] INFO  o.a.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8080"]
+2025-04-27 21:29:22 [main] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+2025-04-27 21:29:22 [main] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.36]
+2025-04-27 21:29:22 [main] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2025-04-27 21:29:22 [main] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 817 ms
+2025-04-27 21:29:22 [main] INFO  o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
+2025-04-27 21:29:22 [main] INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 6.6.8.Final
+2025-04-27 21:29:22 [main] INFO  o.h.c.i.RegionFactoryInitiator - HHH000026: Second-level cache disabled
+2025-04-27 21:29:22 [main] INFO  o.s.o.j.p.SpringPersistenceUnitInfo - No LoadTimeWeaver setup: ignoring JPA class transformer
+2025-04-27 21:29:22 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2025-04-27 21:29:22 [main] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@460e5ffe
+2025-04-27 21:29:22 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2025-04-27 21:29:22 [main] WARN  org.hibernate.orm.deprecation - HHH90000025: PostgreSQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2025-04-27 21:29:22 [main] INFO  o.hibernate.orm.connections.pooling - HHH10001005: Database info:
+	Database JDBC URL [Connecting through datasource 'HikariDataSource (HikariPool-1)']
+	Database driver: undefined/unknown
+	Database version: 17.4
+	Autocommit mode: undefined/unknown
+	Isolation level: undefined/unknown
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2025-04-27 21:29:23 [main] INFO  o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2025-04-27 21:29:23 [main] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-04-27 21:29:23 [main] INFO  o.s.d.j.r.query.QueryEnhancerFactory - Hibernate is in classpath; If applicable, HQL parser will be used.
+2025-04-27 21:29:23 [main] WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-04-27 21:29:23 [main] INFO  o.s.v.b.OptionalValidatorFactoryBean - Failed to set up a Bean Validation provider: jakarta.validation.NoProviderFoundException: Unable to create a Configuration, because no Jakarta Bean Validation provider could be found. Add a provider like Hibernate Validator (RI) to your classpath.
+2025-04-27 21:29:24 [main] INFO  o.a.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8080"]
+2025-04-27 21:29:24 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port 8080 (http) with context path '/'
+2025-04-27 21:29:24 [main] INFO  c.e.fakemaleru.FakemaleruApplication - Started FakemaleruApplication in 3.114 seconds (process running for 3.443)
+2025-04-27 21:29:43 [http-nio-8080-exec-3] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2025-04-27 21:29:43 [http-nio-8080-exec-3] INFO  o.s.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+2025-04-27 21:29:43 [http-nio-8080-exec-3] INFO  o.s.web.servlet.DispatcherServlet - Completed initialization in 0 ms
+2025-04-27 21:29:43 [http-nio-8080-exec-3] INFO  c.e.fakemaleru.aspect.LoggingAspect - Enter: com.example.fakemaleru.controller.UserController.saveUsersBulk() with argument[s] = [[User(id=null, username=user1, password=password123, email=user1@example.com), User(id=null, username=user2, password=password456, email=user2@example.com), User(id=null, username=user3, password=password789, email=user3@example.com)]]
+2025-04-27 21:29:43 [http-nio-8080-exec-3] INFO  c.e.fakemaleru.aspect.LoggingAspect - Enter: com.example.fakemaleru.service.impl.UserServiceImpl.createUsersBulk() with argument[s] = [[User(id=null, username=user1, password=password123, email=user1@example.com), User(id=null, username=user2, password=password456, email=user2@example.com), User(id=null, username=user3, password=password789, email=user3@example.com)]]
+2025-04-27 21:29:43 [http-nio-8080-exec-3] WARN  o.h.e.jdbc.spi.SqlExceptionHelper - SQL Error: 0, SQLState: 23505
+2025-04-27 21:29:43 [http-nio-8080-exec-3] ERROR o.h.e.jdbc.spi.SqlExceptionHelper - ОШИБКА: повторяющееся значение ключа нарушает ограничение уникальности "app_user_email_key"
+  Подробности: Ключ "(email)=(user1@example.com)" уже существует.
+2025-04-27 21:29:43 [http-nio-8080-exec-3] ERROR c.e.fakemaleru.aspect.LoggingAspect - Exception in com.example.fakemaleru.service.impl.UserServiceImpl.createUsersBulk() with cause = NULL
+2025-04-27 21:29:43 [http-nio-8080-exec-3] ERROR c.e.fakemaleru.aspect.LoggingAspect - Exception in com.example.fakemaleru.controller.UserController.saveUsersBulk() with cause = NULL
+2025-04-27 21:29:47 [http-nio-8080-exec-4] INFO  c.e.fakemaleru.aspect.LoggingAspect - Enter: com.example.fakemaleru.controller.UserController.readAllUsers() with argument[s] = []
+2025-04-27 21:29:47 [http-nio-8080-exec-4] INFO  c.e.fakemaleru.aspect.LoggingAspect - Enter: com.example.fakemaleru.service.impl.UserServiceImpl.readAllUsers() with argument[s] = []
+2025-04-27 21:29:47 [http-nio-8080-exec-4] INFO  c.e.fakemaleru.aspect.LoggingAspect - Exit: com.example.fakemaleru.service.impl.UserServiceImpl.readAllUsers() with result = [User(id=2, username=grisha, password=Apple, email=lool@gmail.com), User(id=3, username=donald, password=Apbuz, email=ronald@gmail.com), User(id=252, username=exampleUser, password=examplePassword, email=user@example.com), User(id=352, username=user1, password=password123, email=user1@example.com), User(id=353, username=user2, password=password456, email=user2@example.com), User(id=354, username=user3, password=password789, email=user3@example.com)]
+2025-04-27 21:29:47 [http-nio-8080-exec-4] INFO  c.e.fakemaleru.aspect.LoggingAspect - Exit: com.example.fakemaleru.controller.UserController.readAllUsers() with result = <200 OK OK,[User(id=2, username=grisha, password=Apple, email=lool@gmail.com), User(id=3, username=donald, password=Apbuz, email=ronald@gmail.com), User(id=252, username=exampleUser, password=examplePassword, email=user@example.com), User(id=352, username=user1, password=password123, email=user1@example.com), User(id=353, username=user2, password=password456, email=user2@example.com), User(id=354, username=user3, password=password789, email=user3@example.com)],[]>
+2025-04-27 21:31:56 [SpringApplicationShutdownHook] INFO  o.s.b.w.e.tomcat.GracefulShutdown - Commencing graceful shutdown. Waiting for active requests to complete
+2025-04-27 21:31:56 [tomcat-shutdown] INFO  o.s.b.w.e.tomcat.GracefulShutdown - Graceful shutdown complete
+2025-04-27 21:31:56 [SpringApplicationShutdownHook] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
+2025-04-27 21:31:56 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
+2025-04-27 21:31:56 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.

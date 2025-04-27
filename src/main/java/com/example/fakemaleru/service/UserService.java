@@ -19,4 +19,6 @@ public interface UserService {
     List<User> readCuriousUsers(int questionAmount);
 
     List<User> readDiscussingUsers(String titleFragment);
+
+    List<User> createUsersBulk(List<User> newUsers);
 }

@@ -7,6 +7,7 @@ import com.example.fakemaleru.model.User;
 import com.example.fakemaleru.repository.UserRepository;
 import com.example.fakemaleru.service.UserService;
 import com.example.fakemaleru.util.CacheUtil;
+import java.util.ArrayList;
 import java.util.List;
 import lombok.AllArgsConstructor;
 import org.springframework.context.annotation.Primary;
@@ -106,4 +107,35 @@ public class UserServiceImpl implements UserService {
         return userRepository.findDiscussingUsers(titleFragment).stream()
                 .toList();
     }
+
+    @Override
+    public List<User> createUsersBulk(List<User> newUsers) {
+        if (newUsers == null || newUsers.isEmpty()) {
+            throw new WrongRequest("Your request is empty.");
+        }
+
+        List<User> savedUsers = new ArrayList<>();
+
+        for (User newUser : newUsers) {
+            if (newUser.getUsername() == null) {
+                throw new WrongRequest("Username is empty for one of the users.");
+            }
+            if (newUser.getEmail() == null) {
+                throw new WrongRequest("Email is empty for one of the users.");
+            }
+            if (newUser.getPassword() == null) {
+                throw new WrongRequest("Password is empty for one of the users.");
+            }
+
+            try {
+                savedUsers.add(userRepository.save(newUser));
+            } catch (DataIntegrityViolationException e) {
+                throw new ConflictException("Email " + newUser.getEmail()
+                        + " already exists for one of the users.");
+            }
+        }
+
+        return savedUsers;
+    }
+
 }
