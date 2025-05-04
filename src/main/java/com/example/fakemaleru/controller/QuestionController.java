@@ -97,4 +97,19 @@ public class QuestionController {
         questionService.deleteQuestionById(id);
     }
 
+    @Operation(summary = "Create new questions",
+            description = "Create multiple questions associated with a specific user.")
+    @ApiResponses(value = {
+        @ApiResponse(responseCode = "200", description = "Questions successfully created"),
+        @ApiResponse(responseCode = "400", description = "Bad request"),
+        @ApiResponse(responseCode = "404", description = "User not found"),
+        @ApiResponse(responseCode = "500", description = "Internal server error")
+    })
+    @SuppressWarnings({"checkstyle:WhitespaceAround", "checkstyle:ParameterName"})
+    @PostMapping("save/bulk/{user_id}")
+    public List<Question> createQuestions(@PathVariable Long user_id,
+                                          @RequestBody List<Question> questions) {
+        return questionService.createQuestionsBulk(user_id, questions);
+    }
+
 }

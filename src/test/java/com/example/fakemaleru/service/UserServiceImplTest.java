@@ -10,8 +10,6 @@ import com.example.fakemaleru.util.CacheUtil;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.dao.DataIntegrityViolationException;
-
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -252,78 +250,4 @@ class UserServiceImplTest {
         assertThrows(DataNotFound.class, () -> userService.readUserById(1L));
     }
 
-    @Test
-    void testCreateUsersBulk_WithNullList_ShouldThrowWrongRequest() {
-        // Act & Assert
-        assertThrows(WrongRequest.class, () -> userService.createUsersBulk(null));
-    }
-
-    @Test
-    void testCreateUsersBulk_WithEmptyList_ShouldThrowWrongRequest() {
-        // Act & Assert
-        assertThrows(WrongRequest.class, () -> userService.createUsersBulk(new ArrayList<>()));
-    }
-
-    @Test
-    void testCreateUsersBulk_WithInvalidUser_ShouldThrowWrongRequest() {
-        // Arrange
-        List<User> users = new ArrayList<>();
-        User user = new User();
-        user.setEmail("test@example.com");
-        user.setPassword("password");
-        users.add(user);
-
-        // Act & Assert
-        assertThrows(WrongRequest.class, () -> userService.createUsersBulk(users));
-    }
-
-    @Test
-    void testCreateUsersBulk_WithExistingEmail_ShouldThrowConflictException() {
-        // Arrange
-        List<User> users = new ArrayList<>();
-        User user1 = new User();
-        user1.setUsername("user1");
-        user1.setEmail("test1@example.com");
-        user1.setPassword("password");
-        users.add(user1);
-
-        User user2 = new User();
-        user2.setUsername("user2");
-        user2.setEmail("test2@example.com");
-        user2.setPassword("password");
-        users.add(user2);
-
-        when(userRepository.save(user1)).thenThrow(new DataIntegrityViolationException(""));
-        when(userRepository.save(user2)).thenReturn(user2);
-
-        // Act & Assert
-        assertThrows(ConflictException.class, () -> userService.createUsersBulk(users));
-    }
-
-    @Test
-    void testCreateUsersBulk_Success() {
-        // Arrange
-        List<User> users = new ArrayList<>();
-        User user1 = new User();
-        user1.setUsername("user1");
-        user1.setEmail("test1@example.com");
-        user1.setPassword("password");
-        users.add(user1);
-
-        User user2 = new User();
-        user2.setUsername("user2");
-        user2.setEmail("test2@example.com");
-        user2.setPassword("password");
-        users.add(user2);
-
-        when(userRepository.save(user1)).thenReturn(user1);
-        when(userRepository.save(user2)).thenReturn(user2);
-
-        // Act
-        List<User> createdUsers = userService.createUsersBulk(users);
-
-        // Assert
-        assertEquals(2, createdUsers.size());
-        verify(userRepository, times(2)).save(any(User.class));
-    }
 }

@@ -238,4 +238,96 @@ class QuestionServiceImplTest {
         verify(questionRepository, times(1)).save(existingQuestion);
         verify(cacheUtil, times(1)).evict("question_1");
     }
+    @Test
+    void testCreateQuestions_WithNullQuestions_ShouldThrowWrongRequest() {
+        // Act & Assert
+        assertThrows(WrongRequest.class, () -> questionService.createQuestionsBulk(1L, null));
+    }
+
+    @Test
+    void testCreateQuestions_WithEmptyList_ShouldThrowWrongRequest() {
+        // Arrange
+        List<Question> questions = List.of();
+
+        // Act & Assert
+        WrongRequest exception = assertThrows(WrongRequest.class, () ->
+                questionService.createQuestionsBulk(1L, questions)
+        );
+        assertEquals("Your request is empty.", exception.getMessage());
+    }
+
+    @Test
+    void testCreateQuestions_WithInvalidUser_ShouldThrowDataNotFound() {
+        // Arrange
+        List<Question> questions = List.of(new Question());
+
+        when(userRepository.findUserById(1L)).thenReturn(Optional.empty());
+
+        // Act & Assert
+        DataNotFound exception = assertThrows(DataNotFound.class, () ->
+                questionService.createQuestionsBulk(1L, questions)
+        );
+        assertEquals("User 1 not found", exception.getMessage());
+    }
+
+    @Test
+    void testCreateQuestions_WithNullContent_ShouldThrowWrongRequest() {
+        // Arrange
+        Question question = new Question();
+        question.setTitle("Some Title");
+
+        List<Question> questions = List.of(question);
+
+        when(userRepository.findUserById(1L)).thenReturn(Optional.of(new User()));
+
+        // Act & Assert
+        WrongRequest exception = assertThrows(WrongRequest.class, () ->
+                questionService.createQuestionsBulk(1L, questions)
+        );
+        assertEquals("Content of question is empty.", exception.getMessage());
+    }
+
+    @Test
+    void testCreateQuestions_WithNullTitle_ShouldThrowWrongRequest() {
+        // Arrange
+        Question question = new Question();
+        question.setContent("Some content");
+
+        List<Question> questions = List.of(question);
+
+        when(userRepository.findUserById(1L)).thenReturn(Optional.of(new User()));
+
+        // Act & Assert
+        WrongRequest exception = assertThrows(WrongRequest.class, () ->
+                questionService.createQuestionsBulk(1L, questions)
+        );
+        assertEquals("Title of question is empty.", exception.getMessage());
+    }
+
+    @Test
+    void testCreateQuestions_Success() {
+        // Arrange
+        User user = new User();
+        Question question1 = new Question();
+        question1.setTitle("Title 1");
+        question1.setContent("Content 1");
+
+        Question question2 = new Question();
+        question2.setTitle("Title 2");
+        question2.setContent("Content 2");
+
+        List<Question> questions = List.of(question1, question2);
+
+        when(userRepository.findUserById(1L)).thenReturn(Optional.of(user));
+        when(questionRepository.save(any(Question.class))).thenAnswer(invocation -> invocation.getArgument(0));
+
+        // Act
+        List<Question> createdQuestions = questionService.createQuestionsBulk(1L, questions);
+
+        // Assert
+        assertEquals(2, createdQuestions.size());
+        assertEquals(user, createdQuestions.get(0).getUser());
+        assertEquals(user, createdQuestions.get(1).getUser());
+        verify(questionRepository, times(2)).save(any(Question.class));
+    }
 }

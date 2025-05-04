@@ -9,6 +9,7 @@ import com.example.fakemaleru.repository.UserRepository;
 import com.example.fakemaleru.service.QuestionService;
 import com.example.fakemaleru.util.CacheUtil;
 import java.util.List;
+import java.util.stream.Collectors;
 import lombok.AllArgsConstructor;
 import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Service;
@@ -86,5 +87,32 @@ public class QuestionServiceImpl implements QuestionService {
         question.setTitle(questionNow.getTitle());
         cacheUtil.evict("question_" + question.getId());
         return questionRepository.save(question);
+    }
+
+    @Override
+    public List<Question> createQuestionsBulk(Long userId, List<Question> questions) {
+        if (questions == null || questions.isEmpty()) {
+            throw new WrongRequest("Your request is empty.");
+        }
+
+        User user = userRepository.findUserById(userId)
+                .orElseThrow(() -> new DataNotFound("User " + userId + " not found"));
+
+        List<Question> validQuestions = questions.stream()
+                .peek(question -> {
+                    if (question.getContent() == null) {
+                        throw new WrongRequest("Content of question is empty.");
+                    }
+                    if (question.getTitle() == null) {
+                        throw new WrongRequest("Title of question is empty.");
+                    }
+                    question.setUser(user);
+                })
+                .toList();
+
+
+        return validQuestions.stream()
+                .map(questionRepository::save)
+                .collect(Collectors.toList());
     }
 }

@@ -1,5 +1,6 @@
 package com.example.fakemaleru.controller;
 
+import com.example.fakemaleru.exceptions.WrongRequest;
 import com.example.fakemaleru.model.User;
 import com.example.fakemaleru.service.UserService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -53,9 +54,28 @@ public class UserController {
     })
     @PostMapping("save")
     public User saveUser(@RequestBody User newUser) {
+        if (newUser == null) {
+            throw new WrongRequest("Your request is empty.");
+        }
+        if (newUser.getUsername() == null) {
+            throw new WrongRequest("Your username is empty.");
+        }
+        if (newUser.getEmail() == null) {
+            throw new WrongRequest("Your Email is empty.");
+        }
+        if (!isValidEmail(newUser.getEmail())) {
+            throw new WrongRequest("Your Email is not valid.");
+        }
+        if (newUser.getPassword() == null) {
+            throw new WrongRequest("Your password is empty.");
+        }
         return userService.createUser(newUser);
     }
 
+    boolean isValidEmail(String email) {
+        String emailRegex = "^[\\w-]+@([\\w-]+\\.)+[\\w-]{2,4}$";
+        return email.matches(emailRegex);
+    }
 
     @Operation(summary = "Find user by ID",
             description = "Retrieve a user from the database by their ID.")
@@ -138,18 +158,5 @@ public class UserController {
         List<User> users = userService.readDiscussingUsers(title);
         return new ResponseEntity<>(users, HttpStatus.OK);
     }
-
-    @Operation(summary = "Post new users",
-            description =
-                    "Create new users and save them to database")
-    @ApiResponses(value = {
-        @ApiResponse(responseCode = "200", description = "Successfully retrieved users"),
-        @ApiResponse(responseCode = "400", description = "Bad request"),
-        @ApiResponse(responseCode = "409", description = "Email conflict"),
-        @ApiResponse(responseCode = "500", description = "Internal server error")
-    })
-    @PostMapping("save/bulk")
-    public List<User> saveUsersBulk(@RequestBody List<User> newUsers) {
-        return userService.createUsersBulk(newUsers);
-    }
+    
 }

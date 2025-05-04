@@ -13,4 +13,6 @@ public interface QuestionService {
     void deleteQuestionById(Long id);
 
     Question updateQuestion(Question question);
+
+    List<Question> createQuestionsBulk(Long userId, List<Question> questions);
 }
