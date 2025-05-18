@@ -10,6 +10,8 @@ import com.example.fakemaleru.service.QuestionService;
 import com.example.fakemaleru.util.CacheUtil;
 import java.util.List;
 import java.util.stream.Collectors;
+
+import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
 import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Service;
@@ -59,9 +61,11 @@ public class QuestionServiceImpl implements QuestionService {
         User user = userRepository.findUserById(userId)
                 .orElseThrow(() -> new DataNotFound("User " + userId + " not found"));
         questionNow.setUser(user);
+        questionNow.setUsername(user.getUsername());
         return questionRepository.save(questionNow);
     }
 
+    @Transactional
     @Override
     public void deleteQuestionById(Long id) {
         Question question = questionRepository.findQuestionById(id).orElseThrow(()
@@ -107,6 +111,7 @@ public class QuestionServiceImpl implements QuestionService {
                         throw new WrongRequest("Title of question is empty.");
                     }
                     question.setUser(user);
+                    question.setUsername(user.getUsername());
                 })
                 .toList();
 

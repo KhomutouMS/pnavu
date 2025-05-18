@@ -3,12 +3,13 @@ package com.example.fakemaleru.service.impl;
 import com.example.fakemaleru.exceptions.ConflictException;
 import com.example.fakemaleru.exceptions.DataNotFound;
 import com.example.fakemaleru.exceptions.WrongRequest;
+import com.example.fakemaleru.model.Answer;
+import com.example.fakemaleru.model.Question;
 import com.example.fakemaleru.model.User;
 import com.example.fakemaleru.repository.UserRepository;
 import com.example.fakemaleru.service.UserService;
 import com.example.fakemaleru.util.CacheUtil;
 import java.util.List;
-import java.util.stream.Collectors;
 import lombok.AllArgsConstructor;
 import org.springframework.context.annotation.Primary;
 import org.springframework.dao.DataIntegrityViolationException;
@@ -31,6 +32,10 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User createUser(User newUser) {
+        if (newUser.getUsername() == null || newUser.getUsername().length() < 3
+                || newUser.getUsername().length() > 18) {
+            throw new WrongRequest("Username must be between 3 and 18 characters.");
+        }
         try {
             return userRepository.save(newUser);
         } catch (DataIntegrityViolationException e) {
@@ -52,8 +57,22 @@ public class UserServiceImpl implements UserService {
         }
         User user = userRepository.findUserById(newUser.getId()).orElseThrow(()
                 -> new DataNotFound("User " + newUser.getId() + " not found"));
+        if (newUser.getUsername() == null || newUser.getUsername().length() < 3
+                || newUser.getUsername().length() > 18) {
+            throw new WrongRequest("Username must be between 3 and 18 characters.");
+        }
         user.setUsername(newUser.getUsername());
         user.setPassword(newUser.getPassword());
+        for (Question question : user.getQuestions()) {
+            question.setUsername(user.getUsername()); // Устанавливаем пользователя для вопроса
+            // Если нужно обновить имя в вопросе, добавьте соответствующее поле
+        }
+
+        // Обновляем все связанные ответы
+        for (Answer answer : user.getAnswers()) {
+            answer.setUsername(user.getUsername()); // Устанавливаем пользователя для ответа
+            // Если нужно обновить имя в ответе, добавьте соответствующее поле
+        }
         cacheUtil.evict("user_" + user.getId());
         return userRepository.save(user);
     }

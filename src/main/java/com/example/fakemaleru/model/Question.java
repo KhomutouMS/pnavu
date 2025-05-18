@@ -25,7 +25,7 @@ public class Question {
     private Long id;
     private String title;
     private String content;
-
+    private String username;
     @OneToMany(mappedBy = "question", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @ToString.Exclude
     private List<Answer> answers;

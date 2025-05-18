@@ -142,11 +142,11 @@ public class LogController {
         try {
             LogService.LogTask task = logService.getTaskStatus(taskId);
             if (task == null) {
-                return ResponseEntity.notFound().build();
+                throw new WrongRequest("Wrong Id");
             }
 
             if (task.getStatus() != LogService.LogTask.Status.COMPLETED) {
-                return ResponseEntity.notFound().build();
+                throw new WrongRequest("File is not completed! Wait");
             }
 
             byte[] data = logService.getLogFile(taskId);

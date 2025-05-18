@@ -20,7 +20,7 @@ public class Answer {
     @GeneratedValue
     private Long id;
     private String content;
-
+    private String username;
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
     @JsonIgnore

@@ -45,6 +45,7 @@ public class AnswerServiceImpl implements AnswerService {
                 -> new DataNotFound("User " + userId + " not found"));
         answerNow.setQuestion(question);
         answerNow.setUser(user);
+        answerNow.setUsername(user.getUsername());
         return answerRepository.save(answerNow);
     }
 

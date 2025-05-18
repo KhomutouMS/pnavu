@@ -1,6 +1,5 @@
 package com.example.fakemaleru.service.impl;
 
-import com.example.fakemaleru.exceptions.WrongRequest;
 import com.example.fakemaleru.logging.NoLog;
 import com.example.fakemaleru.service.LogService;
 import java.io.BufferedReader;
@@ -31,7 +30,7 @@ public class LogServiceImpl implements LogService {
     private final String logDirectory = "logs";
 
     @Value("${logging.file.name}")
-    private String logFilePath;
+    public String logFilePath;
 
     private static final ThreadLocal<Boolean> isLogging = ThreadLocal.withInitial(() -> false);
 

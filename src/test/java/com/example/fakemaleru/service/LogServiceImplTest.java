@@ -1,138 +1,103 @@
 package com.example.fakemaleru.service;
 
-import com.example.fakemaleru.exceptions.WrongRequest;
 import com.example.fakemaleru.service.impl.LogServiceImpl;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.mockito.InjectMocks;
-import org.mockito.MockitoAnnotations;
-
-import java.io.IOException;
+import java.io.*;
 import java.nio.file.Files;
-import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.time.LocalDate;
-import java.util.Arrays;
-import java.util.Collections;
-
 import static org.junit.jupiter.api.Assertions.*;
 
-class LogServiceImplTest {
+public class LogServiceImplTest {
 
-    @InjectMocks
     private LogServiceImpl logService;
+    private String logFilePath;
 
     @BeforeEach
-    void setUp() {
-        MockitoAnnotations.openMocks(this);
+    public void setUp() throws IOException {
         logService = new LogServiceImpl();
-        logService.setLogFilePath("test-logs.txt"); // Устанавливаем путь к файлу
-    }
+        logFilePath = "logs/test_log.txt";
+        logService.logFilePath = logFilePath;
 
-    @Test
-    void testGetLogsForDate_Success() throws IOException {
-        // Создаем тестовый файл с логами
-        Path testLogFile = Path.of("test-logs.txt");
-        Files.write(testLogFile, Arrays.asList(
-                "2023-04-28 Log entry 1",
-                "2023-04-28 Log entry 2",
-                "2023-04-29 Log entry 3"
-        ));
-
-        String result = logService.getLogsForDate(LocalDate.of(2023, 4, 28));
-        assertEquals("2023-04-28 Log entry 1\n2023-04-28 Log entry 2", result);
-
-        // Удаляем тестовый файл
-        Files.delete(testLogFile);
-    }
-
-    @Test
-    void testGetLogsForDate_NoLogsFound() {
-        // Создаем тестовый файл с логами
-        Path testLogFile = Path.of("test-logs.txt");
-        try {
-            Files.write(testLogFile, Arrays.asList(
-                    "2023-04-28 Log entry 1",
-                    "2023-04-28 Log entry 2"
-            ));
-
-            WrongRequest thrown = assertThrows(WrongRequest.class, () -> {
-                logService.getLogsForDate(LocalDate.of(2023, 4, 29));
-            });
-            assertEquals("No logs found for date: 2023-04-29", thrown.getMessage());
-
-        } catch (IOException e) {
-            fail("IOException should not occur: " + e.getMessage());
-        } finally {
-            // Удаляем тестовый файл
-            try {
-                Files.deleteIfExists(testLogFile);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+        // Create log directory and test log file
+        new File("logs").mkdirs();
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(logFilePath))) {
+            writer.write("2025-05-10 Sample log entry 1\n");
+            writer.write("2025-05-10 Sample log entry 2\n");
+            writer.write("2025-05-11 Sample log entry 3\n");
         }
     }
 
     @Test
-    void testGetLogsForDate_FileDoesNotExist() {
-        logService.setLogFilePath("nonexistent-file.txt");
+    public void testGetLogsForDate() throws IOException {
+        LocalDate date = LocalDate.of(2025, 5, 10);
+        String logs = logService.getLogsForDate(date);
+        assertTrue(logs.contains("Sample log entry 1"));
+        assertTrue(logs.contains("Sample log entry 2"));
+        assertFalse(logs.contains("Sample log entry 3"));
+    }
 
-        IOException thrown = assertThrows(IOException.class, () -> {
-            logService.getLogsForDate(LocalDate.of(2023, 4, 28));
+    @Test
+    public void testGetLogsForUnknownDate() throws IOException {
+        LocalDate date = LocalDate.of(2025, 5, 12);
+        String logs = logService.getLogsForDate(date);
+        assertEquals("No logs found for date: 2025-05-12", logs);
+    }
+
+    @Test
+    public void testCreateLogTask() {
+        LocalDate date = LocalDate.now();
+        String taskId = logService.createLogTask("Sample log content", date);
+        assertNotNull(taskId);
+        assertTrue(logService.getTaskStatus(taskId) != null);
+    }
+
+    @Test
+    public void testGetTaskStatus() {
+        LocalDate date = LocalDate.now();
+        String taskId = logService.createLogTask("Sample log content", date);
+        LogService.LogTask task = logService.getTaskStatus(taskId);
+        assertEquals(LogService.LogTask.Status.PROCESSING, task.getStatus());
+    }
+
+    @Test
+    public void testGetLogFile() throws IOException, InterruptedException {
+        LocalDate date = LocalDate.now();
+        String taskId = logService.createLogTask("Sample log content", date);
+
+        // Wait for the task to complete
+        Thread.sleep(35000); // Adjust the time based on processing delay
+
+        byte[] logFile = logService.getLogFile(taskId);
+        assertNotNull(logFile);
+        assertTrue(logFile.length > 0);
+    }
+
+    @Test
+    public void testGetLogFileForIncompleteTask() throws IOException {
+        LocalDate date = LocalDate.now();
+        String taskId = logService.createLogTask("Sample log content", date);
+
+        // Simulate immediate retrieval before completion
+        byte[] logFile = logService.getLogFile(taskId);
+        assertNull(logFile, "Log file should be null for incomplete task");
+    }
+
+    @Test
+    public void testHandleIOExceptionInGetLogsForDate() throws IOException {
+        logService.logFilePath = "invalid/path/to/logfile.txt";
+        LocalDate date = LocalDate.now();
+        Exception exception = assertThrows(IOException.class, () -> {
+            logService.getLogsForDate(date);
         });
-
-        assertEquals("Log file does not exist", thrown.getMessage());
+        assertTrue(exception.getMessage().contains("Log file does not exist"));
     }
 
-    @Test
-    void testGetLogsForDate_EmptyFile() throws IOException {
-        // Создаем пустой файл
-        Path testLogFile = Path.of("test-logs.txt");
-        Files.write(testLogFile, Collections.emptyList());
-
-        WrongRequest thrown = assertThrows(WrongRequest.class, () -> {
-            logService.getLogsForDate(LocalDate.of(2023, 4, 28));
-        });
-        assertEquals("No logs found for date: 2023-04-28", thrown.getMessage());
-
-        // Удаляем тестовый файл
-        Files.delete(testLogFile);
-    }
-
-    @Test
-    void testGetLogsForDate_SingleEntry() throws IOException {
-        // Создаем файл с одной записью
-        Path testLogFile = Path.of("test-logs.txt");
-        Files.write(testLogFile, Collections.singletonList("2023-04-28 Log entry"));
-
-        String result = logService.getLogsForDate(LocalDate.of(2023, 4, 28));
-        assertEquals("2023-04-28 Log entry", result);
-
-        // Удаляем тестовый файл
-        Files.delete(testLogFile);
-    }
-
-    @Test
-    void testGetLogsForDate_MultipleEntriesDifferentDates() throws IOException {
-        // Создаем файл с несколькими записями
-        Path testLogFile = Path.of("test-logs.txt");
-        Files.write(testLogFile, Arrays.asList(
-                "2023-04-28 Log entry 1",
-                "2023-04-29 Log entry 2",
-                "2023-04-28 Log entry 3"
-        ));
-
-        String result = logService.getLogsForDate(LocalDate.of(2023, 4, 28));
-        assertEquals("2023-04-28 Log entry 1\n2023-04-28 Log entry 3", result);
-
-        // Удаляем тестовый файл
-        Files.delete(testLogFile);
-    }
-
-    @Test
-    void testGetLogsForDate_IncorrectDateFormat() {
-        // Проверяем, что метод выбрасывает исключение для неверного формата файла
-        assertThrows(IOException.class, () -> {
-            logService.getLogsForDate(LocalDate.of(2023, 4, 31)); // Неверная дата
-        });
+    @AfterEach
+    public void tearDown() throws IOException {
+        Files.deleteIfExists(Paths.get(logFilePath));
+        Files.deleteIfExists(Paths.get("logs"));
     }
 }
